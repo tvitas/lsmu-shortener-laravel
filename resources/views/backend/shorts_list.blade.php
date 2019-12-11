@@ -23,6 +23,7 @@
 <li><a class="uk-text-primary" href="{{ route('admin.shorts.add') }}" uk-icon="icon: plus; ratio: 1.2" uk-tooltip="title: {{ __('Add new record') }}; pos: bottom-left"></a></li>
 <li><button id="button-trash" type="button" class="uk-text-danger"  uk-icon="icon: trash; ratio: 1.2" uk-tooltip="title: {{ __('Delete all of selected') }}; pos: bottom-center"></button></li>
 <li><button id="button-import" uk-toggle="target: #upload-modal"  type="button" class="uk-text-primary" uk-icon="icon: pull; ratio: 1.2" uk-tooltip="title: {{ __('Import from text/csv') }}; pos: bottom-center"></button></li>
+<li><a class="uk-text-primary" href="{{ route('admin.shorts.help') }}" uk-icon="icon: question; ratio: 1.2" uk-tooltip="title: {{ __('User\'s manual') }}; pos: bottom-left" target="_blank"></a></li>
 </ul>
 
 {{-- List itself --}}
