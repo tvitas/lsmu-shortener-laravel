@@ -99,6 +99,7 @@ class ShortsController extends \App\Http\Controllers\Controller
 
                 $shortInstance = $short->updateOrCreate(['id' => $id], $validated);
                 $shortInstance->users()->sync($final);
+
                 return redirect()->to(route('admin.shorts.index'));
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->with('danger', $e->getMessage())->withInput();

@@ -38,6 +38,13 @@ Route::get('/{short}', 'ShortsRedirectController@index')
     ->name('shorts.redirect');
 
 Route::group(['prefix'=> '/admin', 'middleware' => 'auth'], function() {
+
+    // Shorts help
+    Route::get('/help', function() {
+        $view = 'backend.help.index_' . app()->getLocale();
+        return view($view);
+    })->name('admin.shorts.help');
+
     // Shorts CRUD
     Route::get('/', 'Backend\ShortsController@index')
         ->name('admin.shorts.index');
