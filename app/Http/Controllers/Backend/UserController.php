@@ -12,6 +12,8 @@ class UserController
     {
         $filter = $request->input('qu', $request->session()->get('users_q', ''));
         session()->put('users_q', $filter);
+        $page = $request->get('page', 1);
+        session()->put('page', $page);
 
         $users = User::orderBy('name')->when($filter, function ($q0) use ($filter) {
             $q0->where('name', 'LIKE', '%' . $filter .'%')
@@ -65,7 +67,7 @@ class UserController
                     unset($validated['password']);
                 }
                 $instance = User::updateOrCreate(['id' => $id], $validated);
-                return redirect()->to(route('admin.users.index'));
+                return redirect()->to(route('admin.users.index', ['page' => session()->get('page', 1)]));
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->with('danger', $e->getMessage())->withInput();
             } catch (\Exception $e) {
