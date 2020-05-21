@@ -21,6 +21,8 @@ class ShortsController extends \App\Http\Controllers\Controller
     {
         $filter = $request->input('q', $request->session()->get('shorts_q', ''));
         session()->put('shorts_q', $filter);
+        $page = $request->get('page', 1);
+        session()->put('page', $page);
 
         $userId = Auth::user()->id;
 
@@ -63,7 +65,7 @@ class ShortsController extends \App\Http\Controllers\Controller
         $selected = collect($request->input('selected', []));
         if ($selected->isNotEmpty()) {
             Short::destroy($selected->all());
-            return redirect(route('admin.shorts.index'));
+            return redirect(route('admin.shorts.index', ['page' => session()->get('page', 1)]));
         }
         return redirect()->back()->with('primary', __('Nothing to delete'));
     }
@@ -98,7 +100,7 @@ class ShortsController extends \App\Http\Controllers\Controller
                 $shortInstance = $short->updateOrCreate(['id' => $id], $validated);
                 $shortInstance->users()->sync($final);
 
-                return redirect()->to(route('admin.shorts.index'));
+                return redirect()->to(route('admin.shorts.index', ['page' => session()->get('page', 1)]));
             } catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->with('danger', $e->getMessage())->withInput();
             } catch (\Exception $e) {

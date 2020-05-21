@@ -73,7 +73,7 @@
 </div>
 
 <div class="uk-margin">
-<a class="uk-button uk-button-primary" href="{{ route('admin.shorts.index') }}">{{ __('Back') }}</a>
+<a class="uk-button uk-button-primary" href="{{ route('admin.shorts.index', ['page' => session()->get('page', 1)]) }}">{{ __('Back') }}</a>
 <button id="download-button" type="button" class="uk-button uk-button-secondary">{{ __('Download') }}</button>
 </div>
 

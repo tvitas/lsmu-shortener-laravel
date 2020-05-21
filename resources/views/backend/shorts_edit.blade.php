@@ -47,7 +47,7 @@
 
 
 <button class="uk-button uk-button-primary" type="submit">{{ __('Save') }}</button>
-<a class="uk-button uk-margin uk-button-danger" href="{{ route('admin.shorts.index') }}">{{ __('Cancel') }}</a>
+<a class="uk-button uk-margin uk-button-danger" href="{{ route('admin.shorts.index', ['page' => session()->get('page', 1)]) }}">{{ __('Cancel') }}</a>
 </form>
 
 </div>
