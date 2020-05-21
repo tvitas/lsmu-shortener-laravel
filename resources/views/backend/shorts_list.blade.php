@@ -35,6 +35,7 @@
 <thead>
 <tr>
 <th><input class="uk-checkbox" type="checkbox" id="select-all"></th>
+<th>Id</th>
 <th>{{ __('Tags') }}</th>
 <th class="uk-width-1-4" style="word-break:break-all;">{{ __('URL') }}</th>
 <th>{{ __('Short') }}</th>
@@ -48,10 +49,12 @@
 <tr>
 {{-- Check box --}}
 <td><input type="checkbox" class="uk-checkbox" name="selected[]" value="{{ $short->id }}"></td>
+{{-- Id --}}
+<td class="uk-table-link"><a class="uk-link-reset" href="{{ route('admin.shorts.edit', ['id' => $short->id]) }}" uk-tooltip="title: {{ __('Click to edit') }}; pos: bottom-center">{{ $short->id }}</a></td>
 {{-- Tags --}}
 <td class="uk-table-link"><a class="uk-link-reset" href="{{ route('admin.shorts.edit', ['id' => $short->id]) }}" uk-tooltip="title: {{ __('Click to edit') }}; pos: bottom-center">{{ $short->tags }}</a></td>
 {{-- URL --}}
-<td class="uk-table-link uk-width-1-4" style="word-break:break-all;"><a class="uk-link-reset" href="{{ route('admin.shorts.edit', ['id' => $short->id]) }}" uk-tooltip="title: {{ __('Click to edit') }}; pos: bottom-center">{{ $short->url }}</a></td>
+<td class="uk-table-link uk-width-1-4"><a class="uk-link-reset" href="{{ route('admin.shorts.edit', ['id' => $short->id]) }}" uk-tooltip="title: {{ __('Click to edit') }}; pos: bottom-center">{{ Str::limit($short->url, 35) }}</a></td>
 {{-- Short --}}
 <td class="uk-table-link"><a class="uk-link-reset" href="{{ request()->getSchemeAndHttpHost()}}/{{ $short->identifier }}" target="_blank" uk-tooltip="title: {{ __('Click to test short URL') }}; pos: bottom-center">{{ request()->getSchemeAndHttpHost()}}/{{ $short->identifier }}</a></td>
 {{-- View --}}

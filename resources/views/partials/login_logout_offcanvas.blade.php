@@ -12,9 +12,6 @@
 <li class="uk-nav-divider"></li>
 <li>
 <a href="{{ route('logout') }}" onclick="event.preventDefault(); $('#logout-form').submit();">{{ __('Logout') }}</a>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-@csrf
-</form>
 </li>
 @endguest
 </ul>

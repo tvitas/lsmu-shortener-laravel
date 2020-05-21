@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +45,6 @@ class ShortsController extends \App\Http\Controllers\Controller
         $short = Short::whereHas('users', function ($qr) use ($userId) {
                 $qr->where('user_id', $userId);
             })->where('id', $id)->first();
-
         if (isset($short)) {
             return view('backend/shorts_edit', compact('short', 'users'));
         }

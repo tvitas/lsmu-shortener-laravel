@@ -4,8 +4,8 @@ return [
         'auth' => '/admin',
     ],
     'paginator' => [
-        'shorts' => 10,
-        'users' => 10,
+        'shorts' => 20,
+        'users' => 20,
     ],
 
     'import' => [

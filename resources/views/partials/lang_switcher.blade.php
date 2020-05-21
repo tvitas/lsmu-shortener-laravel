@@ -4,7 +4,3 @@
 @endforeach
 <li class="uk-nav-divider"></li>
 </ul>
-<form id="locale-form" action="{{ route('setLang') }}" method="POST" style="display: none;">
-@csrf
-<input type="hidden" id="lang" name="lang">
-</form>

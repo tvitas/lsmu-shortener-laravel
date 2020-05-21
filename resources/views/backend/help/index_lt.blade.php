@@ -1,10 +1,9 @@
-@extends('layouts.backend')
+@extends('layouts.clean-html')
 
 @section('content')
-<div class="uk-container uk-margin-bottom">
-<div class="uk-card uk-card-default uk-card-body" uk-height-viewport="offset-top: true">
+<div class="uk-container uk-margin" style="background: #fff;">
 
-<h2 id="start" class="uk-card-header">{{ __('User\'s manual') }}</h2>
+<h2 id="start">{{ __('User\'s manual') }}</h2>
 <h3 id="index">Turinys</h3>
 <ul class="uk-list">
 <li><a href="#login-to-system">Prisijungti prie sistemos</a></li>
@@ -66,7 +65,7 @@ Sistemos naudotojas gali įvesti ilgą URL ir gauti jo sutrumpinimą, kuris bus 
 {{-- Tags --}}
 <td class="uk-table-link"><a class="uk-link-reset" href="#" uk-tooltip="title: {{ __('Click to edit') }}; pos: bottom-center">Office365 apklausa</a></td>
 {{-- URL --}}
-<td class="uk-table-link uk-width-1-4" style="word-break:break-all;"><a class="uk-link-reset" href="#" uk-tooltip="title: {{ __('Click to edit') }}; pos: bottom-center">https://forms.office.com/Pages/ResponsePage.aspx?id=uy1DDa_e9UKv3oLWh4_f_08iXptKVzpBmqyX7VXonPZUN1dRMkdOUDRDU1RaOE05OFNRNEdHSjBURS4u</a></td>
+<td class="uk-table-link uk-width-1-4"><a class="uk-link-reset" href="#" uk-tooltip="title: {{ __('Click to edit') }}; pos: bottom-center">{{ Str::limit('https://forms.office.com/Pages/ResponsePage.aspx?id=uy1DDa_e9UKv3oLWh4_f_08iXptKVzpBmqyX7VXonPZUN1dRMkdOUDRDU1RaOE05OFNRNEdHSjBURS4u', 35) }}</a></td>
 {{-- Short --}}
 <td class="uk-table-link"><a class="uk-link-reset" href="#" uk-tooltip="title: {{ __('Click to test short URL') }}; pos: bottom-center">{{ request()->getSchemeAndHttpHost()}}/oc5o1fyxeo</a></td>
 {{-- View --}}
@@ -98,6 +97,7 @@ Sistemos naudotojas gali įvesti ilgą URL ir gauti jo sutrumpinimą, kuris bus 
 <h3 id="add-record">Įvesti naują URL įrašą</h3>
 <ol>
 <li>Spausti <a class="uk-text-primary" href="#" uk-icon="icon: plus; ratio: 1.2" uk-tooltip="title: {{ __('Add new record') }}; pos: bottom-left"></a> įrankių juostoje. Atverčiama naujo įrašo įvedimo forma.</li>
+@include('backend.help.partials.help_add_form')
 <li>Į laukelį „URL, kuris trumpinamas“ įvesti ilgąjį URL. Spausti <button type="button" class="uk-button uk-button-primary" uk-icon="icon: link"></button>. Sugeneruojamas ilgojo URL trumpinys.</li>
 <li>Į laukelį „Žymės“ įvesti trumpinio pavadinimą. Pvz. „Office 365 apklausa“, arba „Basalis olive“.</li>
 <li>Jeigu trumpinys galiojantis, t. y. tai ne koks „juodraštis“, pažymėti <label><input class="uk-checkbox" type="checkbox" value="1" checked> {{ __('Active') }}</label>.</li>
@@ -116,7 +116,9 @@ Sistemos naudotojas gali įvesti ilgą URL ir gauti jo sutrumpinimą, kuris bus 
 <li>Toje pačioje eilutėje, kaip ir URL, atskirtas kableliu, gali būti ir URL žymės aprašymas.</li>
 </ol>
 </li>
-<li>Spausti <button type="button" class="uk-text-primary" uk-icon="icon: pull; ratio: 1.2" uk-tooltip="title: {{ __('Import from text/csv') }}; pos: bottom-center"></button> įrankių juostoje. Atverčiama failo importui išrinkimo forma.</li>
+<li>Spausti <button type="button" class="uk-text-primary" uk-icon="icon: pull; ratio: 1.2" uk-tooltip="title: {{ __('Import from text/csv') }}; pos: bottom-center"></button> įrankių juostoje. Atverčiama failo importui išrinkimo forma.
+@include('backend.help.partials.help_upload_modal')
+</li>
 <li>Spausti „Pasirinkite failą importavimui“. Atverčiamas failo išrinkimo dialogas.</li>
 <li>Išrinkti paruoštą failą su URL.</li>
 <li>Spausti <button type="button" class="uk-button uk-button-primary">{{ __('Import') }}</button> URL iš paruošto failo importuojami į duomenų bazę, sugeneruojami URL trumpiniai.</li>
@@ -124,7 +126,11 @@ Sistemos naudotojas gali įvesti ilgą URL ir gauti jo sutrumpinimą, kuris bus 
 </ol>
 <h3 id="get-qr-code">Gauti QR kodą</h3>
 <ol>
-<li>Spausti <a class="uk-icon-link" href="#" uk-tooltip="title: {{ __('Click to get Qr code') }}; pos: bottom-center" uk-icon="icon: download; ratio: 1.2"></a> URL sąraše. Atverčiama įrašo peržiūros/QR kodo atsisiuntimo forma.</li>
+<li>Spausti <a class="uk-icon-link" href="#" uk-tooltip="title: {{ __('Click to get Qr code') }}; pos: bottom-center" uk-icon="icon: download; ratio: 1.2"></a> URL sąraše. Atverčiama įrašo peržiūros/QR kodo atsisiuntimo forma.
+<div class="uk-text-center">
+<img src="{{ asset('images/img-short-view.png') }}">	
+</div>
+</li>
 <li>Su „potenciometru“ <input id="size_in" type="range" name="size" value="150" min="100" max="600" step="50"> galima pasirinkti atsisiunčiamojo QR kodo paveikslėlio dydį. Numatytoji reikšmė – 150 &times; 150 pikselių</li>
 <li>Laukeliuose „Formatas“ galima pažymėti kokio formato paveikslėlis bus atsisiunčiamas. Numatytoji reikšmė – SVG, PNG, EPS.</li>
 <li>Laukelyje „Failo vardo priešdėlis“ galima įvesti QR kodo failo vardo priešdėlį, pvz. „basalis-olive“. Numatytoji reikšmė – trumpojo URL identifikatorius.</li>
@@ -158,6 +164,5 @@ Jeigu QR kodą reikia įdėti pvz. į tinklalapį, ar pristatymo skaidrę – u�
 <li>Spausti <button type="button" class="uk-text-danger" uk-icon="icon: trash; ratio: 1.2" uk-tooltip="title: {{ __('Delete all of selected') }}; pos: bottom-center"></button> įrankių juostoje.</li>
 <li>Įrašai ištrinami. <span class="uk-text-danger">Šis veiksmas negrįžtamas.</span></li>
 </ol>
-</div>
 </div>
 @endsection
